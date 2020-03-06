@@ -1,0 +1,13 @@
+<Page 
+    xmlns="http://schemas.nativescript.org/tns.xsd" 
+    navigatingTo="onNavigatingTo"
+    loaded="{{ onLoaded }}">
+    <ActionBar title="Score Board" icon=""></ActionBar>
+
+    <ScrollView>
+        <StackLayout>
+            <StackLayout id="scoreBoard"></StackLayout>
+            <Button text="Clear Score Board" tap="{{ onClearScoreBoard }}"></Button>
+        </StackLayout>
+    </ScrollView>
+</Page>

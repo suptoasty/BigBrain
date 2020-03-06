@@ -1,0 +1,32 @@
+<Page 
+    xmlns="http://schemas.nativescript.org/tns.xsd" 
+    navigatingTo="onNavigatingTo"
+    loaded="{{ onLoad }}">
+    <ActionBar title="{{ 'Guess Count: ' +  guessCount }}" icon=""></ActionBar>
+
+    <ScrollView>
+
+        <StackLayout>
+            <StackLayout id="board">
+                <StackLayout id="pegs" orientation="horizontal">
+                    <Button width="25" text="🔵" tap="{{ onChangePeg }}"></Button>
+                    <Button width="25" text="🔵" tap="{{ onChangePeg }}"></Button>
+                    <Button width="25" text="🔵" tap="{{ onChangePeg }}"></Button>
+                    <Button width="25" text="🔵" tap="{{ onChangePeg }}"></Button>
+                </StackLayout>
+                <Button text="Guess" tap="{{ onGuess }}"></Button>
+            </StackLayout>
+            <StackLayout visibility="{{ isCheaterModeEnabled ? 'visible' : 'collapse' }}" id="solution" orientation="horizontal"></StackLayout>
+            <StackLayout  orientation="horizontal">
+                <Button text="New Game" tap="{{ onNewGame }}"></Button>
+                <Button text="Score Board" tap="{{ onScorePressed }}"></Button>
+                <Button text="Wanna Cheat?" tap="{{ onToggleCheaterMode }}"></Button>
+            </StackLayout>
+            <StackLayout>
+                <Label text="Hint: "></Label>
+                <StackLayout id="hint"></StackLayout>
+                <Label text="Jason Lonsinger - in fulllment of requirements for Assignment 8 of CMSC 4233 in the Spring 2020 course." textWrap="true"></Label>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+    </Page>
