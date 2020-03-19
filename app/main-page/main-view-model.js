@@ -9,8 +9,8 @@ const Button = require("tns-core-modules/ui/button").Button;
 const StackLayout = require("tns-core-modules/ui/layouts/stack-layout").StackLayout;
 const appSettings = require("tns-core-modules/application-settings");
 const Sound = require("nativescript-sound-kak");
-// const ToolTip = require("nativescript-tooltip").ToolTip;
-// const tip = new ToolTip(view,{text:"Some Text",backgroundColor:"pink",textColor:"black"});
+const view = require("tns-core-modules/application/application").view;
+const ToolTip = require("nativescript-tooltip").ToolTip;
 
 const newGameSound = Sound.create(fs.knownFolders.currentApp().getFolder("sounds").path+"/UI_Quirky1.mp3");
 const changePegSound = Sound.create(fs.knownFolders.currentApp().getFolder("sounds").path+"/UI_Quirky_52.mp3");
@@ -31,7 +31,7 @@ function createViewModel() {
 			{ name: "blue-and-white", character: "⏺️"},
 			{ name: "hollow-red", character: "⭕"}
 		],
-		games: JSON.parse(appSettings.getString("data")), //container for old games
+		games: new Array(), //container for old games
 		code: new Array(), //container for the solution
 		//create code for player to solve
 		createCode: function(args) {
@@ -56,11 +56,13 @@ function createViewModel() {
 				let button = new Button();
 				button.text = "🔵";
 				button.width = 25;
+				if(i==3) button.id = "DemoButton";
 				button.on("tap", this.onChangePeg, this);
 				stack.addChild(button);
 			}
 			let guessButton = new Button();
 			guessButton.text = "Guess";
+			guessButton.id = "GuessButton";
 			guessButton.on("tap", this.onGuess, this);
 			
 			board.addChild(stack);
@@ -85,19 +87,20 @@ function createViewModel() {
 
 			this.guessCount = global.guessCount; //restore the guess count
 			
-			//prevents crash on first load
+			// prevents crash on first load
 			// if(typeof(global.games) === typeof({}) && Object.keys(global.games).length == 0) {
 			// 	global.games = new Array();
 			// }
-			// this.games = global.games; //restore game history
+			this.games = JSON.parse(appSettings.getString("data")); //restore game history
 			this.onNewGame(args);
 			if(this.tutorial) this.StartWalkthrough(args);
 		},
 		//go to the score board page
 		onScorePressed: function(args) {
+			this.tutorial = false;
 			global.guessCount = this.guessCount //save guess count
-			global.games = this.games; //save game history
 			appSettings.setString("data", JSON.stringify(this.games));
+			global.games = this.games; //save game history
 			Frame.topmost().navigate({
 				moduleName: "score-page/score-page",
 				context: {
@@ -256,10 +259,112 @@ function createViewModel() {
 			//create the first slot
 			this.createRow(args);
 			newGameSound.play();
-
+			
 		},
 		StartWalkthrough: function(args) {
-			
+			let page = args.object.page;
+			let tip;
+			var th = this.OnGuess;
+			setTimeout(function() {
+				tip = new ToolTip(page.getViewById("DemoButton"), {
+					text: "Tap The Peg To Change It's Color",
+					position: "bottom",
+					hideArrow: false,
+					textColor: "black",
+					backgroundColor: "blue",
+					style: "CustomToolTipLayoutStyle",
+					width:1000
+				});
+				tip.show();
+			}, 0);
+
+			setTimeout(()=>{
+				tip.hide();
+				tip = new ToolTip(page.getViewById("GuessButton"), {
+					text: "Tap The Guess Button To Submitt The Pegs Colors and Positions",
+					position: "bottom",
+					hideArrow: false,
+					textColor: "black",
+					backgroundColor: "blue",
+					style: "CustomToolTipLayoutStyle",
+					width:400
+				});
+				tip.show();
+			}, 5000);
+
+			setTimeout(function(){
+				tip.hide();
+				tip = new ToolTip(page.getViewById("hint"), {
+					text: "Hints Will Be Given After Each Guess",
+					position: "bottom",
+					hideArrow: false,
+					textColor: "black",
+					backgroundColor: "blue",
+					style: "CustomToolTipLayoutStyle",
+					width:1000
+				});
+				tip.show();
+			}, 10000);
+
+			setTimeout(function(){
+				tip.hide();
+				tip = new ToolTip(page.getViewById("hint"), {
+					text: "Each Hint Will Give You Information About If A Peg Has the Right Color, or if that color is a part of the solution but in the wrong Position, NO hint will be given if no right colors are guessed",
+					position: "bottom",
+					hideArrow: false,
+					textColor: "black",
+					backgroundColor: "blue",
+					style: "CustomToolTipLayoutStyle",
+					width:1000
+				});
+				tip.show();
+			}, 15000);
+
+			setTimeout(function(){
+				tip.hide();
+				tip = new ToolTip(page.getViewById("title"), {
+					text: "You Have 12 Rounds Until It Is Game Over!",
+					position: "bottom",
+					hideArrow: false,
+					textColor: "black",
+					backgroundColor: "blue",
+					style: "CustomToolTipLayoutStyle",
+					width:1000
+				});
+				tip.show();
+			}, 30000);
+
+			setTimeout(function(){
+				tip.hide();
+				tip = new ToolTip(page.getViewById("CheatButton"), {
+					text: "You Can Always Cheat?!",
+					position: "bottom",
+					hideArrow: false,
+					textColor: "black",
+					backgroundColor: "blue",
+					style: "CustomToolTipLayoutStyle",
+					width:1000
+				});
+				tip.show();
+			}, 35000);
+
+			setTimeout(function(){
+				tip.hide();
+				tip = new ToolTip(page.getViewById("NewGameButton"), {
+					text: "Or Start A New Game?!",
+					position: "right",
+					hideArrow: false,
+					textColor: "black",
+					backgroundColor: "blue",
+					style: "CustomToolTipLayoutStyle",
+					width:1000
+				});
+				tip.show();
+			}, 40000);
+
+			setTimeout(function() {
+				tip.hide();
+			}, 45000);
 		}
 	});
 

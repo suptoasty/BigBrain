@@ -1,0 +1,28 @@
+{
+    "logs": [
+        {
+            "outputFile": "/home/jason/BigBrain/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v29/values-v29.xml",
+            "map": [
+                {
+                    "source": "/home/jason/BigBrain/platforms/android/app/src/main/res/values-v29/styles.xml",
+                    "from": {
+                        "startLines": "8,4",
+                        "startColumns": "4,4",
+                        "startOffsets": "276,146",
+                        "endLines": "9,6",
+                        "endColumns": "12,12",
+                        "endOffsets": "336,270"
+                    },
+                    "to": {
+                        "startLines": "2,4",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,120",
+                        "endLines": "3,6",
+                        "endColumns": "12,12",
+                        "endOffsets": "115,244"
+                    }
+                }
+            ]
+        }
+    ]
+}

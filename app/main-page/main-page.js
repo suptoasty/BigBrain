@@ -7,6 +7,7 @@ function onNavigatingTo(args) {
 
     const data = page.navigationContext;
     page.bindingContext.set("tutorial", data.tutorial);
+    page.bindingContext.set("games", data.games);
 
 }
 

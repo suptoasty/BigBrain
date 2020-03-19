@@ -1,0 +1,26 @@
+[
+    {
+        "name": "@nativescript/theme",
+        "directory": "../../node_modules/@nativescript/theme"
+    },
+    {
+        "name": "nativescript-sound-kak",
+        "directory": "../../node_modules/nativescript-sound-kak"
+    },
+    {
+        "name": "nativescript-tooltip",
+        "directory": "../../node_modules/nativescript-tooltip"
+    },
+    {
+        "name": "tns-core-modules",
+        "directory": "../../node_modules/tns-core-modules"
+    },
+    {
+        "name": "@nativescript/core",
+        "directory": "../../node_modules/@nativescript/core"
+    },
+    {
+        "name": "tns-core-modules-widgets",
+        "directory": "../../node_modules/tns-core-modules-widgets"
+    }
+]

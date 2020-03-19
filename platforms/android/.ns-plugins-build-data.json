@@ -1,0 +1,11 @@
+{
+	"nativescript-tooltip": {
+		"/home/jason/BigBrain/node_modules/nativescript-tooltip/platforms/android/include.gradle": "541e26572f228140736e6e2da8d6ee53f1d3fd96"
+	},
+	"@nativescript/core": {
+		"/home/jason/BigBrain/node_modules/@nativescript/core/platforms/android/native-api-usage.json": "34ee0e9771ad7dd9d388c191734d71507a04565a"
+	},
+	"tns-core-modules-widgets": {
+		"/home/jason/BigBrain/node_modules/tns-core-modules-widgets/platforms/android/widgets-release.aar": "bf772614fb9bf3fe38727cea65488dc4e6a22a15"
+	}
+}

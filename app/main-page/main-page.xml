@@ -2,7 +2,7 @@
     xmlns="http://schemas.nativescript.org/tns.xsd" 
     navigatingTo="onNavigatingTo"
     loaded="{{ onLoad }}">
-    <ActionBar title="{{ 'Guess Count: ' +  guessCount }}" icon=""></ActionBar>
+    <ActionBar title="{{ 'Guess Count: ' +  guessCount }}" icon=""><Label id="title" text="{{ 'Guess Count: ' +  guessCount }}"></Label></ActionBar>
 
     <ScrollView>
 
@@ -14,18 +14,17 @@
                     <Button width="25" text="🔵" tap="{{ onChangePeg }}"></Button>
                     <Button width="25" text="🔵" tap="{{ onChangePeg }}"></Button>
                 </StackLayout>
-                <Button text="Guess" tap="{{ onGuess }}"></Button>
+                <Button text="Guess" tap="{{ onGuess }}" id="GuessButton"></Button>
             </StackLayout>
             <StackLayout visibility="{{ isCheaterModeEnabled ? 'visible' : 'collapse' }}" id="solution" orientation="horizontal"></StackLayout>
             <StackLayout  orientation="horizontal">
-                <Button text="New Game" tap="{{ onNewGame }}"></Button>
+                <Button text="New Game" tap="{{ onNewGame }}" id="NewGameButton"></Button>
                 <Button text="Score Board" tap="{{ onScorePressed }}"></Button>
-                <Button text="Wanna Cheat?" tap="{{ onToggleCheaterMode }}"></Button>
+                <Button text="Wanna Cheat?" tap="{{ onToggleCheaterMode }}" id="CheatButton"></Button>
             </StackLayout>
             <StackLayout>
                 <Label text="Hint: "></Label>
                 <StackLayout id="hint"></StackLayout>
-                <Label text="Jason Lonsinger - in fulllment of requirements for Assignment 8 of CMSC 4233 in the Spring 2020 course." textWrap="true"></Label>
             </StackLayout>
         </StackLayout>
     </ScrollView>

@@ -19,15 +19,17 @@ function createViewModel() {
         onLoad: function(args) {
             //prevents crash on first load
 			if(typeof(global.games) === typeof({}) && Object.keys(global.games).length == 0) {
-				global.games = new Array();
+                global.games = new Array();
 			}
 			this.games = global.games; //restore game history
+            appSettings.setString("data", JSON.stringify(this.games));
         },
         onStartTutorial: function(args) {
             Frame.topmost().navigate({
                 moduleName: "main-page/main-page",
                 context: {
-                    tutorial: true
+                    tutorial: true,
+                    games: this.games
                 }
 			});
         },
@@ -35,7 +37,8 @@ function createViewModel() {
             Frame.topmost().navigate({
                 moduleName: "main-page/main-page",
                 context: {
-                    tutorial: false
+                    tutorial: false,
+                    games: this.games
                 }
 			});
         },

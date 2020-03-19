@@ -1,7 +1,8 @@
 {
-	"time": "",
-	"nativePlatformStatus": "1",
+	"time": "Thu Mar 19 2020 10:41:05 GMT-0500 (Central Daylight Time)",
+	"nativePlatformStatus": "3",
+	"release": false,
 	"changesRequireBuild": true,
-	"projectFileHash": "54f266e5a17a9c75112d183bc222ba47aa69ed716ca98b93a4d6bbbfcee0ef6d",
-	"changesRequireBuildTime": null
+	"projectFileHash": "585063f15e3a8dcef81bec8d00860ff31bde82ced3044cc2ae0261cdd6369d20",
+	"changesRequireBuildTime": "Thu Mar 19 2020 10:41:05 GMT-0500 (Central Daylight Time)"
 }
