@@ -1,0 +1,17 @@
+<Page 
+    xmlns="http://schemas.nativescript.org/tns.xsd" 
+    navigatingTo="onNavigatingTo"
+    loaded="{{ onLoad }}">
+    <ActionBar title="Intro Screen" icon=""></ActionBar>
+
+    <ScrollView>
+        <StackLayout>
+            <Label text="Application Image:"></Label>
+            <Label text="🎲" fontSize="64"></Label>
+            <Label text="Jason Lonsinger - in fulfillment of requirements for Assignment 9 of CMSC 4233 in the Spring 2020 course." textWrap="true"></Label>
+            <Button text="Start Game" tap="{{ onStartGame }}"></Button>
+            <Button text="Walk Through" tap="{{ onStartTutorial }}"></Button>
+            <Button text="Score Board" tap="{{ onScoreBoard }}"></Button>
+        </StackLayout>
+    </ScrollView>
+</Page>

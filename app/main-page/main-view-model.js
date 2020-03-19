@@ -1,17 +1,25 @@
 const Observable = require("tns-core-modules/data/observable").Observable;
-const SelectedPageService = require("./shared/selected-page-service");
+const SelectedPageService = require("../shared/selected-page-service");
 const ObservableModule = require("tns-core-modules/data/observable");
 const Frame = require("tns-core-modules/ui/frame").Frame;
 const File = require("tns-core-modules/file-system/file-system").File;
+const fs = require("tns-core-modules/file-system/file-system");
 const Label = require("tns-core-modules/ui/label").Label;
 const Button = require("tns-core-modules/ui/button").Button;
 const StackLayout = require("tns-core-modules/ui/layouts/stack-layout").StackLayout;
 const appSettings = require("tns-core-modules/application-settings");
+const Sound = require("nativescript-sound-kak");
+// const ToolTip = require("nativescript-tooltip").ToolTip;
+// const tip = new ToolTip(view,{text:"Some Text",backgroundColor:"pink",textColor:"black"});
+
+const newGameSound = Sound.create(fs.knownFolders.currentApp().getFolder("sounds").path+"/UI_Quirky1.mp3");
+const changePegSound = Sound.create(fs.knownFolders.currentApp().getFolder("sounds").path+"/UI_Quirky_52.mp3");
 
 function createViewModel() {
 	SelectedPageService.getInstance().updateSelectedPage("main-page");
 
 	const viewModel = ObservableModule.fromObject({
+		tutorial: false,
 		guessCount: 0, //the number of guesses form 1-12
 		isCheaterModeEnabled: false, //flag for showing the solution for cheaters
 		//defualt array of pegs for playing the game
@@ -23,7 +31,7 @@ function createViewModel() {
 			{ name: "blue-and-white", character: "⏺️"},
 			{ name: "hollow-red", character: "⭕"}
 		],
-		games: new Array(), //container for old games
+		games: JSON.parse(appSettings.getString("data")), //container for old games
 		code: new Array(), //container for the solution
 		//create code for player to solve
 		createCode: function(args) {
@@ -64,6 +72,7 @@ function createViewModel() {
 		},
 		//when the page loads create a new game and get guessCount
 		onLoad: function(args) {
+			console.log("IS TUTORIAL:"+this.tutorial);
 			if(this.code.length !== 0) return; //if no code then return
 			
 			//when the app is started create first code to solve
@@ -77,10 +86,12 @@ function createViewModel() {
 			this.guessCount = global.guessCount; //restore the guess count
 			
 			//prevents crash on first load
-			if(typeof(global.games) === typeof({}) && Object.keys(global.games).length == 0) {
-				global.games = new Array();
-			}
-			this.games = global.games; //restore game history
+			// if(typeof(global.games) === typeof({}) && Object.keys(global.games).length == 0) {
+			// 	global.games = new Array();
+			// }
+			// this.games = global.games; //restore game history
+			this.onNewGame(args);
+			if(this.tutorial) this.StartWalkthrough(args);
 		},
 		//go to the score board page
 		onScorePressed: function(args) {
@@ -212,6 +223,7 @@ function createViewModel() {
 				if(this.pegs[i].character == button.text)  {
 					button.text = this.pegs[(i+1)%this.pegs.length].character;
 					//console.log(this.pegs[(i+1)%this.pegs.length].name);
+					changePegSound.play();
 					return;
 				}
 			}
@@ -243,8 +255,12 @@ function createViewModel() {
 
 			//create the first slot
 			this.createRow(args);
+			newGameSound.play();
 
 		},
+		StartWalkthrough: function(args) {
+			
+		}
 	});
 
 	return viewModel;

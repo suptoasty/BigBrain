@@ -19,7 +19,7 @@ function createViewModel() {
         onClearScoreBoard: function(args) {
             //appSettings.setString("data", JSON.stringify({}));
             global.games = new Array();
-            console.log("CJLE");
+            console.log("CJLE"); 
         },
         createScoreBoard: function(args) {
             let scoreBoard = args.object.getViewById("scoreBoard"); //the score board
